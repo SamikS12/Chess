@@ -1,3 +1,3 @@
 # ChessProject
 
-This is essentially the code to play chess includes player vs player only.
+Local Player vs Player Chess in Python.
