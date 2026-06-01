@@ -21,23 +21,33 @@ class Piece():
         self.color = color         
         self.position = position 
         self.piece = piece
+    
+    def update_board():
+        starting_board = [
+            ["br", "bn", "bb", "bq", "bk", "bb", "bn", "br"],
+            ["bp", "bp", "bp", "bp", "bp", "bp", "bp", "bp"],
+            ["", "", "", "", "", "", "", ""],
+            ["", "", "", "", "", "", "", ""],
+            ["", "", "", "", "", "", "", ""],
+            ["", "", "", "", "", "", "", ""],
+            ["wp", "wp", "wp", "wp", "wp", "wp", "wp", "wp"],
+            ["wr", "wn", "wb", "wq", "wk", "wb", "wn", "wr"]
+        ]
 
-    def getValidPawnMove(move):
-        return false
+    def getValidPawnMove():
+        return validMoves
 
-    def getValidKnightMove(move):
-        return false
+    def getValidKnightMove():
+        return validMoves
 
-    def getValidBishopMove(move):
-        return false
+    def getValidBishopMove():
+        return validMoves
 
-    def getValidRookMove(move):
-        return false
+    def getValidRookMove():
+        return validMoves
 
-    def getValidQueenMove(move):
-        return false
+    def getValidQueenMove():
+        return validMoves
 
-    def getValidKingMove(move):
-        return false
-
-class ChessState:
+    def getValidKingMove():
+        return validMoves

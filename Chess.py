@@ -4,6 +4,7 @@ from datetime import datetime
 from sys import platform
 import os
 from copy import deepcopy
+from ChessState import Piece
 
 pygame.init()
 screen = pygame.display.set_mode((900, 750), pygame.RESIZABLE)
@@ -35,8 +36,9 @@ while running:
             clicked_col = mouse_x
             clicked_row = mouse_y
             print(f"Clicked square: Row {clicked_row}, Column {clicked_col}")
+            move = [clicked_row, clicked_col]
+            return move
             #middle columns, 44, 140, 235
-
     
     screen.fill((255, 255, 255))
     scaled_board = pygame.transform.scale(board, (750, 750))
