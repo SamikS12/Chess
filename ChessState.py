@@ -22,6 +22,22 @@ class Piece(Enum):
         self.position = position 
         self.piece = piece
 
-    def isValidMove(self):
+    def getValidPawnMove(move):
+        return false
+
+    def getValidKnightMove(move):
+        return false
+
+    def getValidBishopMove(move):
+        return false
+
+    def getValidRookMove(move):
+        return false
+
+    def getValidQueenMove(move):
+        return false
+
+    def getValidKingMove(move):
+        return false
 
 class ChessState:
