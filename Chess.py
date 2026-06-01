@@ -10,6 +10,7 @@ screen = pygame.display.set_mode((900, 750), pygame.RESIZABLE)
 
 board = pygame.image.load("Chess_Board/brown.png").convert_alpha()
 
+#PIECES BLACK & WHITE
 bp = pygame.image.load("Chess_Pieces/bp.png").convert_alpha() #black pawn
 bn = pygame.image.load("Chess_Pieces/bn.png").convert_alpha() #black knight
 bb = pygame.image.load("Chess_Pieces/bb.png").convert_alpha() #black bishop
@@ -29,11 +30,20 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-            
-    screen.fill((255, 255, 255))
-    scaled_image = pygame.transform.scale(board, (750, 750))
-    screen.blit(scaled_image, (0, 0))
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            mouse_x, mouse_y = pygame.mouse.get_pos()
+            clicked_col = mouse_x
+            clicked_row = mouse_y
+            print(f"Clicked square: Row {clicked_row}, Column {clicked_col}")
+            #middle columns, 44, 140, 235
     
+    screen.fill((255, 255, 255))
+    scaled_board = pygame.transform.scale(board, (750, 750))
+    screen.blit(scaled_board, (0, 0))
+
+    #bp1 = pygame.transform.scale(bp, (100, 100))
+    #screen.blit(bp1, (0, 0))
+
     pygame.display.flip()
 
 pygame.quit()
