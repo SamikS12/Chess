@@ -1,4 +1,4 @@
-from enum import Enum
+#from enum import Enum
 import pygame
 
 #PIECES BLACK & WHITE
@@ -16,7 +16,7 @@ wr = pygame.image.load("Chess_Pieces/wr.png").convert_alpha() #white rook
 wq = pygame.image.load("Chess_Pieces/wq.png").convert_alpha() #white queen
 wk = pygame.image.load("Chess_Pieces/wk.png").convert_alpha() #white king  
 
-class Piece(Enum):
+class Piece():
     def __init__(self, color, position):
         self.color = color         
         self.position = position 
