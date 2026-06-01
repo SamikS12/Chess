@@ -24,4 +24,4 @@ class Piece(Enum):
 
     def isValidMove(self):
 
-class ChessState
+class ChessState:

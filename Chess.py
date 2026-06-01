@@ -36,6 +36,7 @@ while running:
             clicked_row = mouse_y
             print(f"Clicked square: Row {clicked_row}, Column {clicked_col}")
             #middle columns, 44, 140, 235
+            
     
     screen.fill((255, 255, 255))
     scaled_board = pygame.transform.scale(board, (750, 750))
