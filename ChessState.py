@@ -22,7 +22,6 @@ import sys
 class ChessState:
     def __init__(self):
         self.whiteToMove = True
-
         self.board = [
             ["br", "bn", "bb", "bq", "bk", "bb", "bn", "br"],
             ["bp", "bp", "bp", "bp", "bp", "bp", "bp", "bp"],
@@ -34,6 +33,12 @@ class ChessState:
             ["wr", "wn", "wb", "wq", "wk", "wb", "wn", "wr"]]
 
         self.moveLog = [] 
+
+    def main(self): 
+        printBoard()
+
+    if __name__ == "__main__":
+        main()
 
     def getValidPawnMove(self):
         return validMoves
