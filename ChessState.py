@@ -1,5 +1,8 @@
 #from enum import Enum
 import pygame
+import sys 
+
+pygame.init()
 
 #PIECES BLACK & WHITE
 bp = pygame.image.load("Chess_Pieces/bp.png").convert_alpha() #black pawn
@@ -16,14 +19,11 @@ wr = pygame.image.load("Chess_Pieces/wr.png").convert_alpha() #white rook
 wq = pygame.image.load("Chess_Pieces/wq.png").convert_alpha() #white queen
 wk = pygame.image.load("Chess_Pieces/wk.png").convert_alpha() #white king  
 
-class Piece():
-    def __init__(self, color, position):
-        self.color = color         
-        self.position = position 
-        self.piece = piece
-    
-    def update_board():
-        starting_board = [
+class ChessState:
+    def __init__(self):
+        self.whiteToMove = True
+
+        self.board = [
             ["br", "bn", "bb", "bq", "bk", "bb", "bn", "br"],
             ["bp", "bp", "bp", "bp", "bp", "bp", "bp", "bp"],
             ["", "", "", "", "", "", "", ""],
@@ -31,23 +31,49 @@ class Piece():
             ["", "", "", "", "", "", "", ""],
             ["", "", "", "", "", "", "", ""],
             ["wp", "wp", "wp", "wp", "wp", "wp", "wp", "wp"],
-            ["wr", "wn", "wb", "wq", "wk", "wb", "wn", "wr"]
-        ]
+            ["wr", "wn", "wb", "wq", "wk", "wb", "wn", "wr"]]
 
-    def getValidPawnMove():
+        self.moveLog = [] 
+    
+    def getValidPawnMove(self):
+        
         return validMoves
 
-    def getValidKnightMove():
+    def getValidKnightMove(self):
         return validMoves
 
-    def getValidBishopMove():
+    def getValidBishopMove(self):
         return validMoves
 
-    def getValidRookMove():
+    def getValidRookMove(self):
         return validMoves
 
-    def getValidQueenMove():
+    def getValidQueenMove(self):
         return validMoves
 
-    def getValidKingMove():
+    def getValidKingMove(self):
         return validMoves
+        
+    def makeMove(self, startRow, startCol, endRow, endCol):
+
+        pieceMoved = self.board[startRow][startCol]
+
+        if pieceMoved == "":
+            return False
+
+        self.board[endRow][endCol] = pieceMoved
+        self.board[startRow][startCol] = ""
+
+        self.moveLog.append(
+            ((startRow, startCol), (endRow, endCol), pieceMoved))
+
+        self.whiteToMove = not self.whiteToMove
+
+        return True
+
+    def getPiece(self, row, col):
+        return self.board[row][col]
+
+    def printBoard(self):
+        for row in self.board:
+            print(row)

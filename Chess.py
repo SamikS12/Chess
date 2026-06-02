@@ -4,12 +4,7 @@ from datetime import datetime
 from sys import platform
 import os
 from copy import deepcopy
-from ChessState import Piece
-
-pygame.init()
-screen = pygame.display.set_mode((900, 750), pygame.RESIZABLE)
-
-board = pygame.image.load("Chess_Board/brown.png").convert_alpha()
+from ChessState import ChessState
 
 #PIECES BLACK & WHITE
 bp = pygame.image.load("Chess_Pieces/bp.png").convert_alpha() #black pawn
@@ -26,6 +21,11 @@ wr = pygame.image.load("Chess_Pieces/wr.png").convert_alpha() #white rook
 wq = pygame.image.load("Chess_Pieces/wq.png").convert_alpha() #white queen
 wk = pygame.image.load("Chess_Pieces/wk.png").convert_alpha() #white king  
 
+pygame.init()
+screen = pygame.display.set_mode((750, 750), pygame.RESIZABLE)
+
+board = pygame.image.load("Chess_Board/brown.png").convert_alpha()
+
 running = True
 while running:
     for event in pygame.event.get():
@@ -37,15 +37,12 @@ while running:
             clicked_row = mouse_y
             print(f"Clicked square: Row {clicked_row}, Column {clicked_col}")
             move = [clicked_row, clicked_col]
-            return move
             #middle columns, 44, 140, 235
+            #return move
     
     screen.fill((255, 255, 255))
     scaled_board = pygame.transform.scale(board, (750, 750))
     screen.blit(scaled_board, (0, 0))
-
-    #bp1 = pygame.transform.scale(bp, (100, 100))
-    #screen.blit(bp1, (0, 0))
 
     pygame.display.flip()
 
