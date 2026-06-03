@@ -21,6 +21,18 @@ class Piece:
 
     def getValidPawnMove(self, board):
         moves = []
+        whitePawnCords = []
+        blackPawnCords = []
+
+        for row in range(len(board)):
+            for col in range(len(board[row])):
+                if board[row][col] == "bp":
+                    blackPawnCords.append((row, col))
+                    print(f"Black pawns on:{blackPawnCords}")
+                if board[row][col] == "wp":
+                    whitePawnCords.append((row, col))
+                    print(f"White pawns on:{whitePawnCords}")
+
         return moves 
 
     def getValidKnightMove(self, board):

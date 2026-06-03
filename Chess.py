@@ -33,7 +33,7 @@ game = ChessState()
 selectedSquare = None
 validMoves = []
 
-def flipBoard():
+#def flipBoard():
 
 def pixelToSquare(x, y):
     col = x // SQUARE_SIZE
@@ -47,6 +47,7 @@ def drawBoard():
 def drawPieces():
     for row in range(8):
         for col in range(8):
+            dragging = True
             pieceCode = game.board[row][col]
             if pieceCode and pieceCode in pieceImages:
                 img = pygame.transform.scale(pieceImages[pieceCode], (SQUARE_SIZE, SQUARE_SIZE))
@@ -69,7 +70,9 @@ while running:
                     if pieceCode:
                         selectedSquare = clickedSquare
                         piece = Piece(pieceCode, clickedSquare)
+                        
                         validMoves = piece.getValidPawnMove(game.board)
+                        print(f"Valid Moves{validMoves}")
                 else:
                     if clickedSquare in validMoves:
                         x, y = selectedSquare
