@@ -16,6 +16,7 @@ pieceImages = {
     "br": pygame.image.load("Chess_Pieces/br.png").convert_alpha(), #black rook
     "bq": pygame.image.load("Chess_Pieces/bq.png").convert_alpha(), #black queen
     "bk": pygame.image.load("Chess_Pieces/bk.png").convert_alpha(), #black king
+    
     "wp": pygame.image.load("Chess_Pieces/wp.png").convert_alpha(), #white pawn
     "wn": pygame.image.load("Chess_Pieces/wn.png").convert_alpha(), #white knight
     "wb": pygame.image.load("Chess_Pieces/wb.png").convert_alpha(), #white bishop
