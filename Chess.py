@@ -70,9 +70,8 @@ while running:
                     if pieceCode:
                         selectedSquare = clickedSquare
                         piece = Piece(pieceCode, clickedSquare)
-                        
                         validMoves = piece.getValidPawnMove(game.board)
-                        print(f"Valid Moves{validMoves}")
+                        #print(f"Valid Moves{validMoves}")
                 else:
                     if clickedSquare in validMoves:
                         x, y = selectedSquare
