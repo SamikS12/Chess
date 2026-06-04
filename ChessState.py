@@ -28,10 +28,18 @@ class Piece:
             for col in range(len(board[row])):
                 if board[row][col] == "bp":
                     blackPawnCords.append((row, col))
-                    print(f"Black pawns on:{blackPawnCords}")
+                    #print(f"Black pawns on:{blackPawnCords}")
                 if board[row][col] == "wp":
                     whitePawnCords.append((row, col))
-                    print(f"White pawns on:{whitePawnCords}")
+                    #print(f"White pawns on:{whitePawnCords}")
+
+        whitePawns = []
+        blackPawns = []
+        whitePawns.append(whitePawnCords)
+        blackPawns.append(blackPawnCords)
+
+        print(f"White pawns on:{whitePawns}")
+        print(f"Black pawns on:{blackPawns}")
 
         return moves 
 
