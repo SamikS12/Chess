@@ -52,10 +52,18 @@ class Piece:
             for col in range(len(board[row])):
                 if board[row][col] == "bn":
                     blackKnightCords.append((row, col))
-                    print(f"Black knight on:{blackKnightCords}")
+                    #print(f"Black pawns on:{blackPawnCords}")
                 if board[row][col] == "wn":
                     whiteKnightCords.append((row, col))
-                    print(f"White knight on:{whiteKnightCords}")
+                    #print(f"White pawns on:{whitePawnCords}")
+
+        whiteKnights = []
+        blackKnights = []
+        whiteKnights.append(whiteKnightCords)
+        blackKnights.append(blackKnightCords)
+
+        print(f"White Knights on:{whiteKnights}")
+        print(f"Black Knights on:{blackKnights}")
 
         return moves 
 
@@ -68,10 +76,18 @@ class Piece:
             for col in range(len(board[row])):
                 if board[row][col] == "bb":
                     blackBishopCords.append((row, col))
-                    print(f"Black bishop on:{blackBishopCords}")
+                    #print(f"Black pawns on:{blackPawnCords}")
                 if board[row][col] == "wb":
                     whiteBishopCords.append((row, col))
-                    print(f"White bishop on:{whiteBishopCords}")
+                    #print(f"White pawns on:{whitePawnCords}")
+
+        whiteBishops = []
+        blackBishops = []
+        whiteBishops.append(whiteBishopCords)
+        blackBishops.append(blackBishopCords)
+
+        print(f"White Bishops on:{whiteBishops}")
+        print(f"Black Bishops on:{blackBishops}")
 
         return moves 
 
@@ -84,10 +100,18 @@ class Piece:
             for col in range(len(board[row])):
                 if board[row][col] == "br":
                     blackRookCords.append((row, col))
-                    print(f"Black rook on:{blackRookCords}")
+                    #print(f"Black pawns on:{blackPawnCords}")
                 if board[row][col] == "wr":
                     whiteRookCords.append((row, col))
-                    print(f"White rook on:{whiteRookCords}")
+                    #print(f"White pawns on:{whitePawnCords}")
+
+        whiteRooks = []
+        blackRooks = []
+        whiteRooks.append(whiteRookCords)
+        blackRooks.append(blackRookCords)
+
+        print(f"White Rooks on:{whiteRooks}")
+        print(f"Black Rooks on:{blackRooks}")
 
         return moves 
 
@@ -100,10 +124,18 @@ class Piece:
             for col in range(len(board[row])):
                 if board[row][col] == "bq":
                     blackQueenCords.append((row, col))
-                    print(f"Black queen on:{blackQueenCords}")
+                    #print(f"Black pawns on:{blackPawnCords}")
                 if board[row][col] == "wq":
                     whiteQueenCords.append((row, col))
-                    print(f"White queen on:{whiteQueenCords}")
+                    #print(f"White pawns on:{whitePawnCords}")
+
+        whiteQueens = []
+        blackQueens = []
+        whiteQueens.append(whiteQueenCords)
+        blackQueens.append(blackQueenCords)
+
+        print(f"White Queen on:{whiteQueens}")
+        print(f"Black Queen on:{blackQueens}")
 
         return moves
 
@@ -116,10 +148,18 @@ class Piece:
             for col in range(len(board[row])):
                 if board[row][col] == "bk":
                     blackKingCords.append((row, col))
-                    print(f"Black king on:{blackKingCords}")
+                    #print(f"Black pawns on:{blackPawnCords}")
                 if board[row][col] == "wk":
                     whiteKingCords.append((row, col))
-                    print(f"White king on:{whiteKingCords}")
+                    #print(f"White pawns on:{whitePawnCords}")
+
+        whiteKings = []
+        blackKings = []
+        whiteKings.append(whiteKingCords)
+        blackKings.append(blackKingCords)
+
+        print(f"White King on:{whiteKings}")
+        print(f"Black King on:{blackKings}")
 
         return moves
 
