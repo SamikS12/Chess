@@ -1,6 +1,5 @@
 #Chess.py
 import pygame
-import time
 from ChessState import ChessState, Piece
 
 pygame.init()
@@ -33,8 +32,6 @@ game = ChessState()
 selectedSquare = None
 validMoves = []
 
-#def flipBoard():
-
 def pixelToSquare(x, y):
     col = x // SQUARE_SIZE
     row = y // SQUARE_SIZE
@@ -47,10 +44,9 @@ def drawBoard():
 def drawPieces():
     for row in range(8):
         for col in range(8):
-            dragging = True
-            pieceCode = game.board[row][col]
-            if pieceCode and pieceCode in pieceImages:
-                img = pygame.transform.scale(pieceImages[pieceCode], (SQUARE_SIZE, SQUARE_SIZE))
+            colorType = game.board[row][col]
+            if colorType and colorType in pieceImages:
+                img = pygame.transform.scale(pieceImages[colorType], (SQUARE_SIZE, SQUARE_SIZE))
                 screen.blit(img, (col * SQUARE_SIZE, row * SQUARE_SIZE))
 
 running = True
@@ -64,14 +60,26 @@ while running:
             if mouseX < BOARD_SIZE and mouseY < BOARD_SIZE:
                 clickedSquare = pixelToSquare(mouseX, mouseY)
                 row, col = clickedSquare
-                pieceCode = game.board[row][col]
+                colorType = game.board[row][col]
 
                 if selectedSquare is None:
-                    if pieceCode:
+                    if colorType:
                         selectedSquare = clickedSquare
-                        piece = Piece(pieceCode, clickedSquare)
-                        validMoves = piece.getValidPawnMove(game.board)
-                        #print(f"Valid Moves{validMoves}")
+                        piece = Piece(colorType, clickedSquare)
+
+                        if (piece.type == "p"):
+                            validMoves = piece.getValidPawnMove(game.board)
+                        elif (piece.type == "n"):
+                            validMoves = piece.getValidKnightMove(game.board)
+                        elif (piece.type == "b"):
+                            validMoves = piece.getValidBishopMove(game.board)
+                        elif (piece.type == "r"):
+                            validMoves = piece.getValidRookMove(game.board)
+                        elif (piece.type == "q"):
+                            validMoves = piece.getValidQueenMove(game.board)
+                        elif (piece.type == "k"):
+                            validMoves = piece.getValidKingMove(game.board)
+
                 else:
                     if clickedSquare in validMoves:
                         x, y = selectedSquare
@@ -88,5 +96,7 @@ while running:
     drawPieces()
     pygame.display.flip()
 
+
 pygame.quit()
+
 
