@@ -103,7 +103,6 @@ while running:
                         validMoves = []
 
                         game.whitesTurn = False
-                    
 
                         #pygame.transform.flip(boardImg, True, False)
 
