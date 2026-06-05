@@ -1,9 +1,13 @@
 #Chess.py
 import pygame
 from ChessState import ChessState, Piece
+import os
+
 
 pygame.init()
+os.environ['SDL_VIDEO_WINDOW_POS'] = '750,50'
 screen = pygame.display.set_mode((750, 750), pygame.RESIZABLE)
+
 pygame.display.set_caption("Chess")
 
 boardImg = pygame.image.load("Chess_Board/brown.png").convert_alpha()
@@ -51,6 +55,7 @@ def drawPieces():
 
 running = True
 while running:
+    
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
@@ -85,17 +90,27 @@ while running:
                         x, y = selectedSquare
                         game.board[row][col] = game.board[x][y]
                         game.board[x][y] = ""
+
                         selectedSquare = None
                         validMoves = []
+
+                        game.whitesTurn = False
+
+                        #pygame.transform.flip(boardImg, True, False)
+
                     elif clickedSquare == selectedSquare:
                         selectedSquare = None
                         validMoves = []
+
+                        game.whitesTurn = False
+                    
+
+                        #pygame.transform.flip(boardImg, True, False)
 
     screen.fill((255, 255, 255))
     drawBoard()
     drawPieces()
     pygame.display.flip()
-
 
 pygame.quit()
 

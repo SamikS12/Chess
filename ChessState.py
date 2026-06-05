@@ -18,16 +18,18 @@ class Piece:
         self.color = colorType[0]
         self.type = colorType[1]
         self.position = position
+        self.whitesTurn = True 
 
     def getValidPawnMove(self, board):
         moves = []
         x, y = self.position
 
-        if (self.color == "w"):
-            if (x - 1 >= 0) and (board[x - 1][y] == ""):
-                moves.append((x - 1, y))
-            if (x == 6) and (board[x - 1][y] == "") and (board[x - 2][y] == ""):
-                moves.append((x - 2, y))
+        if(self.whitesTurn == True):
+            if (self.color == "w"):
+                if (x - 1 >= 0) and (board[x - 1][y] == ""):
+                    moves.append((x - 1, y))
+                if (x == 6) and (board[x - 1][y] == "") and (board[x - 2][y] == ""):
+                    moves.append((x - 2, y))
         else:
             if (x + 1 <= 7) and (board[x + 1][y] == ""):
                 moves.append((x + 1, y))
