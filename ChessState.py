@@ -51,5 +51,23 @@ class Piece:
         return []
 
     def getValidKingMove(self, board):
-        return []
+        moves = []
+        x, y = self.position
+        curColor = board[x,y]
+        change = [
+            (-1,-1), (-1,0), (-1,1), (0,-1), (0,1), (1,0), (1,1), (1,-1)
+        ]
+
+        for changeX, changeY in change:
+            newX = x + changeX
+            newY = y + changeY
+
+            if (0 <= newX <= 7) and (0 <= newY <= 7):
+                newPos = board[newX][newY]
+                
+                if newPos == "":
+                    moves.append((newX, newY))
+                if (newPos[0] != curColor[0]):
+                    moves.append((newX, newY))
+        return moves
 
