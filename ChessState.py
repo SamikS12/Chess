@@ -76,7 +76,6 @@ class Piece:
     def getValidQueenMove(self, board):
         return []
 
-    #written by samik = broken.
     def getValidKingMove(self, board):
         moves = []
         x, y = self.position
@@ -93,8 +92,9 @@ class Piece:
 
             if (0 <= newX <= 7) and (0 <= newY <= 7):
                 newPos = board[newX][newY]
-                
                 if newPos == "":
                     moves.append((newX, newY))
         return moves
+
+    def getValidCastle(self, board):
 
