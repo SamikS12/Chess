@@ -50,10 +50,13 @@ class Piece:
     def getValidQueenMove(self, board):
         return []
 
+    #written by samik = broken.
     def getValidKingMove(self, board):
         moves = []
         x, y = self.position
-        curColor = board[x,y]
+
+        curColor = board[x][y]
+
         change = [
             (-1,-1), (-1,0), (-1,1), (0,-1), (0,1), (1,0), (1,1), (1,-1)
         ]
@@ -66,8 +69,6 @@ class Piece:
                 newPos = board[newX][newY]
                 
                 if newPos == "":
-                    moves.append((newX, newY))
-                if (newPos[0] != curColor[0]):
                     moves.append((newX, newY))
         return moves
 
