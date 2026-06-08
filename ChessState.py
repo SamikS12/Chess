@@ -45,6 +45,32 @@ class Piece:
         return []
 
     def getValidRookMove(self, board):
+        moves = []
+        row, col = self.position
+
+        directions = [(-1, 0),  (1, 0),   (0, -1),  (0, 1)]
+
+        for dRow, dCol in directions:
+            r = row + dRow
+            c = col + dCol
+
+            while 0 <= r < 8 and 0 <= c < 8:
+                piece = board[r][c]
+
+                if piece == "":
+                    moves.append((r, c))
+
+                elif piece[0] != self.color:
+                    moves.append((r, c))
+                    break
+
+                else:
+                    break
+
+                r += dRow
+                c += dCol
+
+        return moves
         return []
 
     def getValidQueenMove(self, board):
