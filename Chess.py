@@ -3,7 +3,6 @@ import pygame
 from ChessState import ChessState, Piece
 import os
 
-
 pygame.init()
 os.environ['SDL_VIDEO_WINDOW_POS'] = '750,50'
 screen = pygame.display.set_mode((750, 750), pygame.RESIZABLE)
