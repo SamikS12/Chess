@@ -68,7 +68,6 @@ class Piece:
                 c += dCol
 
         return moves
-        return []
 
     def getValidRookMove(self, board):
         moves = []
@@ -97,10 +96,52 @@ class Piece:
                 c += dCol
 
         return moves
-        return []
 
     def getValidQueenMove(self, board):
-        return []
+        straightMoves = []
+        diagMoves = []
+        moves = []
+
+        row, col = self.position
+
+        Rdirections = [(-1, 0),  (1, 0),   (0, -1),  (0, 1)]
+
+        for dRow, dCol in Rdirections:
+            r = row + dRow
+            c = col + dCol
+
+            while 0 <= r < 8 and 0 <= c < 8:
+                piece = board[r][c]
+                if piece == "":
+                    straightMoves.append((r, c))
+                elif piece[0] != self.color:
+                    straightMoves.append((r, c))
+                    break
+                else:
+                    break
+                r += dRow
+                c += dCol
+        moves.append(straightMoves) 
+
+        Bdirections = [(-1, 1),  (1, 1),   (1, -1),  (-1, -1)]
+
+        for bRow, bCol in Bdirections:
+            r = row + dRow
+            c = col + dCol
+            while 0 <= r < 8 and 0 <= c < 8:
+                piece = board[r][c]
+                if piece == "":
+                    diagMovesoves.append((r, c))
+                elif piece[0] != self.color:
+                    diagMoves.append((r, c))
+                    break
+                else:
+                    break
+                r += bRow
+                c += bCol
+        moves.append(diagMoves)
+
+        return moves
 
     def getValidKingMove(self, board):
         moves = []
