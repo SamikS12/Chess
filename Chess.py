@@ -68,19 +68,20 @@ while running:
                     if colorType:
                         selectedSquare = clickedSquare
                         piece = Piece(colorType, clickedSquare)
-
-                        if (piece.type == "p"):
-                            validMoves = piece.getValidPawnMove(game.board)
-                        elif (piece.type == "n"):
-                            validMoves = piece.getValidKnightMove(game.board)
-                        elif (piece.type == "b"):
-                            validMoves = piece.getValidBishopMove(game.board)
-                        elif (piece.type == "r"):
-                            validMoves = piece.getValidRookMove(game.board)
-                        elif (piece.type == "q"):
-                            validMoves = piece.getValidQueenMove(game.board)
-                        elif (piece.type == "k"):
-                            validMoves = piece.getValidKingMove(game.board)
+                        if(piece.color == "w" and game.whitesTurn) or (piece.color == "b" and not game.whitesTurn):
+                            selectedSquare = clickedSquare
+                            if (piece.type == "p"):
+                                validMoves = piece.getValidPawnMove(game.board)
+                            elif (piece.type == "n"):
+                                validMoves = piece.getValidKnightMove(game.board)
+                            elif (piece.type == "b"):
+                                validMoves = piece.getValidBishopMove(game.board)
+                            elif (piece.type == "r"):
+                                validMoves = piece.getValidRookMove(game.board)
+                            elif (piece.type == "q"):
+                                validMoves = piece.getValidQueenMove(game.board)
+                            elif (piece.type == "k"):
+                                validMoves = piece.getValidKingMove(game.board)
 
                 else:
                     if clickedSquare in validMoves:
@@ -88,10 +89,10 @@ while running:
                         game.board[row][col] = game.board[x][y]
                         game.board[x][y] = ""
 
+                        game.whitesTurn = not game.whitesTurn
+
                         selectedSquare = None
                         validMoves = []
-
-                        game.whitesTurn = False
 
                     elif (clickedSquare == selectedSquare):
                         selectedSquare = None
