@@ -38,8 +38,23 @@ class Piece:
 
         return moves
 
+
     def getValidKnightMove(self, board):
-        return []
+        moves = []
+        row, col = self.position
+
+        directions = [(-2, -1),(-2, 1), (-1, -2),(-1, 2),(1,-2),(1,2),(2,-1),(2,1)]
+
+        for dRow, dCol in directions:
+            r = row + dRow
+            c = col + dCol
+
+            if 0 <= r < 8 and 0 <= c < 8:
+                piece = board[r][c]
+
+                if piece == "" or piece[0] != self.color:
+                    moves.append((r, c))
+        return moves
 
     def getValidBishopMove(self, board):
         moves = []
@@ -68,7 +83,7 @@ class Piece:
                 c += dCol
 
         return moves
-        return []
+
 
     def getValidRookMove(self, board):
         moves = []
@@ -122,5 +137,4 @@ class Piece:
                 
         return moves
 
-    def getValidCastle(self, board):
 
