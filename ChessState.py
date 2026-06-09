@@ -38,8 +38,23 @@ class Piece:
 
         return moves
 
+
     def getValidKnightMove(self, board):
-        return []
+        moves = []
+        row, col = self.position
+
+        directions = [(-2, -1),(-2, 1), (-1, -2),(-1, 2),(1,-2),(1,2),(2,-1),(2,1)]
+
+        for dRow, dCol in directions:
+            r = row + dRow
+            c = col + dCol
+
+            if 0 <= r < 8 and 0 <= c < 8:
+                piece = board[r][c]
+
+                if piece == "" or piece[0] != self.color:
+                    moves.append((r, c))
+        return moves
 
     def getValidBishopMove(self, board):
         moves = []
@@ -68,6 +83,7 @@ class Piece:
                 c += dCol
 
         return moves
+        return []
 
     def getValidRookMove(self, board):
         moves = []
@@ -98,48 +114,30 @@ class Piece:
         return moves
 
     def getValidQueenMove(self, board):
-        straightMoves = []
-        diagMoves = []
         moves = []
-
         row, col = self.position
 
-        Rdirections = [(-1, 0),  (1, 0),   (0, -1),  (0, 1)]
+        directions = [(-1, 0),  (1, 0),   (0, -1),  (0, 1), (-1, 1),  (1, 1),   (1, -1),  (-1, -1)]
 
-        for dRow, dCol in Rdirections:
+        for dRow, dCol in directions:
             r = row + dRow
             c = col + dCol
 
             while 0 <= r < 8 and 0 <= c < 8:
                 piece = board[r][c]
+
                 if piece == "":
-                    straightMoves.append((r, c))
+                    moves.append((r, c))
+
                 elif piece[0] != self.color:
-                    straightMoves.append((r, c))
+                    moves.append((r, c))
                     break
+
                 else:
                     break
+
                 r += dRow
                 c += dCol
-        moves.append(straightMoves) 
-
-        Bdirections = [(-1, 1),  (1, 1),   (1, -1),  (-1, -1)]
-
-        for bRow, bCol in Bdirections:
-            r = row + dRow
-            c = col + dCol
-            while 0 <= r < 8 and 0 <= c < 8:
-                piece = board[r][c]
-                if piece == "":
-                    diagMovesoves.append((r, c))
-                elif piece[0] != self.color:
-                    diagMoves.append((r, c))
-                    break
-                else:
-                    break
-                r += bRow
-                c += bCol
-        moves.append(diagMoves)
 
         return moves
 
@@ -162,6 +160,7 @@ class Piece:
                     moves.append((newX, newY))
                 
         return moves
+
 
     def getValidCastle(self, board):
         pass
