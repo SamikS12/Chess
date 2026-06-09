@@ -138,3 +138,5 @@ class Piece:
         return moves
 
 
+    def getValidCastle(self, board):
+        pass

@@ -54,11 +54,9 @@ def drawPieces():
 
 running = True
 while running:
-    
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-
         elif event.type == pygame.MOUSEBUTTONDOWN:
             mouseX, mouseY = pygame.mouse.get_pos()
             if mouseX < BOARD_SIZE and mouseY < BOARD_SIZE:
@@ -95,15 +93,12 @@ while running:
 
                         game.whitesTurn = False
 
-                        #pygame.transform.flip(boardImg, True, False)
-
-                    elif clickedSquare == selectedSquare:
+                    elif (clickedSquare == selectedSquare):
                         selectedSquare = None
                         validMoves = []
-
                         game.whitesTurn = False
-
-                        #pygame.transform.flip(boardImg, True, False)
+                        pygame.transform.flip(boardImg, True, False)
+                        #print("flip board")
 
     screen.fill((255, 255, 255))
     drawBoard()
