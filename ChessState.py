@@ -1,6 +1,7 @@
 #ChessState.py
 class ChessState:
     def __init__(self):
+        self.whitesTurn = True 
         self.board = [
             ["br", "bn", "bb", "bq", "bk", "bb", "bn", "br"],
             ["bp", "bp", "bp", "bp", "bp", "bp", "bp", "bp"],
@@ -26,10 +27,9 @@ class Piece:
         moves = []
         x, y = self.position
 
-        if(self.whitesTurn == True):
-            if (self.color == "w"):
-                if (x - 1 >= 0) and (board[x - 1][y] == ""):
-                    moves.append((x - 1, y))
+        if (self.color == "w"):
+            if (x - 1 >= 0) and (board[x - 1][y] == ""):
+                moves.append((x - 1, y))
                 if (x == 6) and (board[x - 1][y] == "") and (board[x - 2][y] == ""):
                     moves.append((x - 2, y))
         else:
