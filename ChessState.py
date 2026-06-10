@@ -11,6 +11,8 @@ class ChessState:
             ["wp", "wp", "wp", "wp", "wp", "wp", "wp", "wp"],
             ["wr", "wn", "wb", "wq", "wk", "wb", "wn", "wr"],
         ]
+        self.moveHistory = []
+        self.whitesTurn = True
 
 class Piece:
     def __init__(self, colorType, position):

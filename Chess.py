@@ -12,6 +12,8 @@ pygame.display.set_caption("Chess")
 boardImg = pygame.image.load("Chess_Board/brown.png").convert_alpha()
 
 #PIECES BLACK & WHITE
+
+
 pieceImages = {
     "bp": pygame.image.load("Chess_Pieces/bp.png").convert_alpha(), #black pawn
     "bn": pygame.image.load("Chess_Pieces/bn.png").convert_alpha(), #black knight
@@ -84,15 +86,28 @@ while running:
 
                 else:
                     if clickedSquare in validMoves:
-                        x, y = selectedSquare
-                        game.board[row][col] = game.board[x][y]
-                        game.board[x][y] = ""
+                        startRow, startCol = selectedSquare
+                        movedPiece = game.board[startRow][startCol]
+                        capturedPiece = game.board[row][col]
+
+                        game.moveHistory.append({
+                            "piece": movedPiece,
+                            "from": (startRow, startCol),
+                            "to": (row, col),
+                            "captured": capturedPiece
+                        })
+
+                        game.board[row][col] = movedPiece
+                        game.board[startRow][startCol] = ""
 
                         selectedSquare = None
                         validMoves = []
 
                         game.whitesTurn = False
 
+                        # show latest move
+                        print(game.moveHistory[-1])
+                        
                     elif (clickedSquare == selectedSquare):
                         selectedSquare = None
                         validMoves = []
