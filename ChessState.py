@@ -1,7 +1,6 @@
 #ChessState.py
 class ChessState:
     def __init__(self):
-        self.whitesTurn = True 
         self.board = [
             ["br", "bn", "bb", "bq", "bk", "bb", "bn", "br"],
             ["bp", "bp", "bp", "bp", "bp", "bp", "bp", "bp"],
@@ -12,8 +11,17 @@ class ChessState:
             ["wp", "wp", "wp", "wp", "wp", "wp", "wp", "wp"],
             ["wr", "wn", "wb", "wq", "wk", "wb", "wn", "wr"],
         ]
-        self.moveHistory = []
-        self.whitesTurn = True
+
+    def flipBoard(self):
+        self.board = self.board[::-1]
+        for row in range(8):
+            for col in range(8):
+                piece = self.board[row][col]
+                if piece:
+                    if piece[0] == "w":
+                        self.board[row][col] = "b" + piece[1]
+                    else:
+                        self.board[row][col] = "w" + piece[1]
 
 class Piece:
     def __init__(self, colorType, position):
@@ -21,7 +29,7 @@ class Piece:
         self.color = colorType[0]
         self.type = colorType[1]
         self.position = position
-        self.whitesTurn = True 
+        self.whitesTurn = True
 
     def getValidPawnMove(self, board):
         moves = []
@@ -32,14 +40,25 @@ class Piece:
                 moves.append((x - 1, y))
                 if (x == 6) and (board[x - 1][y] == "") and (board[x - 2][y] == ""):
                     moves.append((x - 2, y))
+            for dc in [-1, 1]:
+                nx, ny = x - 1, y + dc
+                if 0 <= nx < 8 and 0 <= ny < 8:
+                    target = board[nx][ny]
+                    if target and target[0] == "b":
+                        moves.append((nx, ny))
         else:
             if (x + 1 <= 7) and (board[x + 1][y] == ""):
                 moves.append((x + 1, y))
             if (x == 1) and (board[x + 1][y] == "") and (board[x + 2][y] == ""):
                 moves.append((x + 2, y))
+            for dc in [-1, 1]:
+                nx, ny = x + 1, y + dc
+                if 0 <= nx < 8 and 0 <= ny < 8:
+                    target = board[nx][ny]
+                    if target and target[0] == "w":
+                        moves.append((nx, ny))
 
         return moves
-
 
     def getValidKnightMove(self, board):
         moves = []
@@ -85,7 +104,6 @@ class Piece:
                 c += dCol
 
         return moves
-        return []
 
     def getValidRookMove(self, board):
         moves = []
@@ -158,11 +176,10 @@ class Piece:
 
             if (0 <= newX <= 7) and (0 <= newY <= 7):
                 newPos = board[newX][newY]
-                if newPos == "":
+                if newPos == "" or newPos[0] != self.color:
                     moves.append((newX, newY))
-                
-        return moves
 
+        return moves
 
     def getValidCastle(self, board):
         pass

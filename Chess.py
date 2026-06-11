@@ -12,8 +12,6 @@ pygame.display.set_caption("Chess")
 boardImg = pygame.image.load("Chess_Board/brown.png").convert_alpha()
 
 #PIECES BLACK & WHITE
-
-
 pieceImages = {
     "bp": pygame.image.load("Chess_Pieces/bp.png").convert_alpha(), #black pawn
     "bn": pygame.image.load("Chess_Pieces/bn.png").convert_alpha(), #black knight
@@ -37,14 +35,29 @@ game = ChessState()
 selectedSquare = None
 validMoves = []
 
+HIGHLIGHT_COLOR = (255, 255, 0, 80)
+VALID_MOVE_COLOR = (0, 200, 0, 80)
+
 def pixelToSquare(x, y):
     col = x // SQUARE_SIZE
-    row = y // SQUARE_SIZE
+    row = y // SQUARE_SIZE  
     return row, col
 
 def drawBoard():
     scaledBoard = pygame.transform.scale(boardImg, (BOARD_SIZE, BOARD_SIZE))
     screen.blit(scaledBoard, (0, 0))
+
+def drawHighlights():
+    overlay = pygame.Surface((SQUARE_SIZE, SQUARE_SIZE), pygame.SRCALPHA)
+
+    if selectedSquare:
+        row, col = selectedSquare
+        overlay.fill(HIGHLIGHT_COLOR)
+        screen.blit(overlay, (col * SQUARE_SIZE, row * SQUARE_SIZE))
+
+    overlay.fill(VALID_MOVE_COLOR)
+    for (r, c) in validMoves:
+        screen.blit(overlay, (c * SQUARE_SIZE, r * SQUARE_SIZE))
 
 def drawPieces():
     for row in range(8):
@@ -53,6 +66,21 @@ def drawPieces():
             if colorType and colorType in pieceImages:
                 img = pygame.transform.scale(pieceImages[colorType], (SQUARE_SIZE, SQUARE_SIZE))
                 screen.blit(img, (col * SQUARE_SIZE, row * SQUARE_SIZE))
+
+def getMovesForPiece(piece):
+    if piece.type == "p":
+        return piece.getValidPawnMove(game.board)
+    elif piece.type == "n":
+        return piece.getValidKnightMove(game.board)
+    elif piece.type == "b":
+        return piece.getValidBishopMove(game.board)
+    elif piece.type == "r":
+        return piece.getValidRookMove(game.board)
+    elif piece.type == "q":
+        return piece.getValidQueenMove(game.board)
+    elif piece.type == "k":
+        return piece.getValidKingMove(game.board)
+    return []
 
 running = True
 while running:
@@ -67,63 +95,35 @@ while running:
                 colorType = game.board[row][col]
 
                 if selectedSquare is None:
-                    if colorType:
+                    if colorType and colorType[0] == "w":
                         selectedSquare = clickedSquare
                         piece = Piece(colorType, clickedSquare)
-                        if(piece.color == "w" and game.whitesTurn) or (piece.color == "b" and not game.whitesTurn):
-                            selectedSquare = clickedSquare
-                            if (piece.type == "p"):
-                                validMoves = piece.getValidPawnMove(game.board)
-                            elif (piece.type == "n"):
-                                validMoves = piece.getValidKnightMove(game.board)
-                            elif (piece.type == "b"):
-                                validMoves = piece.getValidBishopMove(game.board)
-                            elif (piece.type == "r"):
-                                validMoves = piece.getValidRookMove(game.board)
-                            elif (piece.type == "q"):
-                                validMoves = piece.getValidQueenMove(game.board)
-                            elif (piece.type == "k"):
-                                validMoves = piece.getValidKingMove(game.board)
+                        validMoves = getMovesForPiece(piece)
 
                 else:
                     if clickedSquare in validMoves:
-                        startRow, startCol = selectedSquare
-                        movedPiece = game.board[startRow][startCol]
-                        capturedPiece = game.board[row][col]
+                        x, y = selectedSquare
+                        game.board[row][col] = game.board[x][y]
+                        game.board[x][y] = ""
 
-                        game.moveHistory.append({
-                            "piece": movedPiece,
-                            "from": (startRow, startCol),
-                            "to": (row, col),
-                            "captured": capturedPiece
-                        })
-
-                        game.board[row][col] = movedPiece
-                        game.board[startRow][startCol] = ""
-
-                        game.whitesTurn = not game.whitesTurn
+                        #game.flipBoard()
 
                         selectedSquare = None
                         validMoves = []
 
-                        game.whitesTurn = False
+                    elif colorType and colorType[0] == "w":
+                        selectedSquare = clickedSquare
+                        piece = Piece(colorType, clickedSquare)
+                        validMoves = getMovesForPiece(piece)
 
-                        # show latest move
-                        print(game.moveHistory[-1])
-                        
-
-                    elif (clickedSquare == selectedSquare):
+                    else:
                         selectedSquare = None
                         validMoves = []
-                        game.whitesTurn = False
-                        pygame.transform.flip(boardImg, True, False)
-                        #print("flip board")
 
     screen.fill((255, 255, 255))
     drawBoard()
+    drawHighlights()
     drawPieces()
     pygame.display.flip()
 
 pygame.quit()
-
-
